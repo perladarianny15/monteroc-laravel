@@ -26,7 +26,7 @@
         @elseif($shownPage == 'category_index')
             @livewire('home.category.index')
         @elseif($shownPage == 'task_create')
-            @livewire('home.category.index')
+            @livewire('home.task.create', ['task_id' => $task_id])
         @elseif($shownPage == 'category_create')
             @livewire('home.category.create', ['category_id' => $category_id])
         @endif

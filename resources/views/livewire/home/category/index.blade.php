@@ -2,7 +2,8 @@
 
     <div class="row">
         <div class="col-md-12">
-            <button type="button" style="float: right" class="btn btn-secondary btn-sm">Create</button>
+            <a type="button" href="javascript:window.livewire.emit('homeNavChangePage', 'category_create')"
+               style="float: right" class="btn btn-secondary btn-sm">Create</a>
 
         </div>
 
@@ -12,22 +13,29 @@
         <tr>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
+            <th scope="col">Status</th>
             <th scope="col">Created Date</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>
-                <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+        @foreach($Categories as $category)
+            <tr>
 
-            </td>
+                <th scope="row">{{$category->name}}</th>
+                <td>{{$category->description}}</td>
+                <td>{{$category->status}}</td>
+                <td>{{$category->created_at}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm" href="javascript:window.livewire.emit('homeNavChangePage', 'category_create', {{$category->id}})">Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm" wire:click="DeleteCategory({{$category->id}})">Delete</button>
 
-        </tr>
+                </td>
+            </tr>
+
+        @endforeach
+
+
         </tbody>
     </table>
 </div>

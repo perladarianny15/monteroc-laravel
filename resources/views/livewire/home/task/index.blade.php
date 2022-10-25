@@ -2,7 +2,8 @@
 
     <div class="row">
         <div class="col-md-12">
-            <button type="button" style="float: right" class="btn btn-secondary btn-sm">Create</button>
+            <a type="button" href="javascript:window.livewire.emit('homeNavChangePage', 'task_create')"
+               style="float: right" class="btn btn-secondary btn-sm">Create</a>
 
         </div>
 
@@ -16,27 +17,28 @@
             <th scope="col">End Date</th>
             <th scope="col">Hours</th>
             <th scope="col">Created Date</th>
-
-            <th scope="col"  colspan="3">Handle</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>Otto</td>
-            <td>Otto</td>
-            <td>Otto</td>
+        @foreach($Tasks as $task)
+            <tr>
+                <th scope="row">{{$task->name}}</th>
+                <td>{{$task->description}}</td>
+                <td>{{$task->start_date}}</td>
+                <td>{{$task->end_date}}</td>
+                <td>{{$task->hours}}</td>
+                <td>{{$task->status}}</td>
+                <td>{{$task->created_at}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm" href="javascript:window.livewire.emit('homeNavChangePage', 'task_create', {{$task->id}})">Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm" wire:click="DeleteTask({{$task->id}})">Delete</button>
+                </td>
+            </tr>
 
-            <td colspan="3">@mdo</td>
-            <td>
-                <button type="button" class="btn btn-primary btn-sm">Edit</button>
-                <button type="button" class="btn btn-danger btn-sm">Delete</button>
-            </td>
+        @endforeach
 
-        </tr>
+
         </tbody>
     </table>
 </div>
